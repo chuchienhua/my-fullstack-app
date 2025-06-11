@@ -8,7 +8,8 @@ services:
       - "3000:3000"
     volumes:
       - ./node-server:/app
-    command: bash -c "npm install && npm start"
+      - /app/node_modules 
+    command: npm start
 
   node-frontend:
     build:
@@ -18,7 +19,8 @@ services:
       - "8084:8084" 
     volumes:
       - ./node-frontend:/app
-    command: bash -c "npm install && npm start"
+      - /app/node_modules 
+    command: npm start
 
   mongodb:
     image: mongo:latest
@@ -50,3 +52,56 @@ services:
 volumes:
   mongodb_data:
   mysql_data:
+
+# version: '3.8'
+# services:
+#   node-server:
+#     build:
+#       context: ./node-server
+#     container_name: node-server
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - ./node-server:/app
+#     command: bash -c "npm install && npm start"
+
+#   node-frontend:
+#     build:
+#       context: ./node-frontend
+#     container_name: node-frontend
+#     ports:
+#       - "8084:8084" 
+#     volumes:
+#       - ./node-frontend:/app
+#     command: bash -c "npm install && npm start"
+
+#   mongodb:
+#     image: mongo:latest
+#     container_name: mongodb
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongodb_data:/data/db
+
+#   mysql:
+#     image: mysql:5.7
+#     container_name: mysql
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       MYSQL_ROOT_PASSWORD: rootpass
+#       MYSQL_DATABASE: testdb
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+
+#   sqlite:
+#     image: nouchka/sqlite3
+#     container_name: sqlite
+#     stdin_open: true
+#     tty: true
+#     volumes:
+#       - ./sqlite_data:/root/db
+
+# volumes:
+#   mongodb_data:
+#   mysql_data:

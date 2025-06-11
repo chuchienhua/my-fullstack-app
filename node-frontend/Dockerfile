@@ -1,6 +1,17 @@
+# FROM node:18
+# WORKDIR /app
+# COPY . .
+# RUN npm install
+# EXPOSE 8084
+# CMD ["npm", "start"]
+
 FROM node:18
+
 WORKDIR /app
+
+COPY package*.json ./
+COPY node_modules ./node_modules
 COPY . .
-RUN npm install
+
 EXPOSE 8084
 CMD ["npm", "start"]
